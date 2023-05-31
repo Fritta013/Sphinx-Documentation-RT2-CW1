@@ -1,0 +1,5 @@
+# Request
+---
+# Response
+int32 counter_cancelled_srv
+int32 counter_success_srv

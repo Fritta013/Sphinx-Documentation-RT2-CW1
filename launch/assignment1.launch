@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+    <include file="$(find assignment_2_2022)/launch/sim_w1.launch" />
+    <node pkg="assignment_2_2022" type="wall_follow_service.py" name="wall_follower"  required="true"/>
+    <node pkg="assignment_2_2022" type="go_to_point_service.py" name="go_to_point"   required="true"/>
+    <node pkg="assignment_2_2022" type="bug_as.py" name="bug_action_service" output="screen"  required="true"/>
+    <node pkg="assignment_2_2022" type="UI.py" name="user_interface" output="screen"  required="true"/>
+    <node pkg="assignment_2_2022" type="check_status.py" name="check_status" output="screen"/>
+    <node pkg="assignment_2_2022" type="check_pos_vel.py" name="check_position_velocity" output="screen">
+    <param name="rate_input" value= "10" />
+    </node>
+</launch>

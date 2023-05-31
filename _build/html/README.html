@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot Simulation using Python and ROS &mdash; RT2_CW2_sphinx 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            RT2_CW2_sphinx
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Robot Simulation using Python and ROS</a><ul>
+<li><a class="reference internal" href="#installing-and-running">Installing and running</a><ul>
+<li><a class="reference internal" href="#dependencies">Dependencies</a></li>
+<li><a class="reference internal" href="#running-from-shell">Running from shell</a></li>
+<li><a class="reference internal" href="#understanding-the-functionalities-and-structure-of-the-project">Understanding the Functionalities and structure of the project</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#project-breakdown">Project Breakdown</a><ul>
+<li><a class="reference internal" href="#launch-file">Launch file</a></li>
+<li><a class="reference internal" href="#the-ui-node">The UI node</a></li>
+<li><a class="reference internal" href="#the-check-status-node">The check_status node</a></li>
+<li><a class="reference internal" href="#the-check-pos-vel-node">The check_pos_vel node</a></li>
+<li><a class="reference internal" href="#future-improvement">Future Improvement</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">RT2_CW2_sphinx</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Robot Simulation using Python and ROS</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="robot-simulation-using-python-and-ros">
+<h1>Robot Simulation using Python and ROS<a class="headerlink" href="#robot-simulation-using-python-and-ros" title="Permalink to this heading"></a></h1>
+<p>This project is the second assignment for Research Track 1. It is a simulation of a motion planning of a mobile robot in an environment. The project was intially forked from the following directory and using the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">  </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/CarmineD8/assignment_2_2022.git
+</pre></div>
+</div>
+<p>Initially, the robot was controlled using the information in its environment. The necessary nodes were implement to allow the robot to follow/drive towards a set position (target x and y), avoid and follow obstacles (“bug0 algorithm) to finally reacht the target positions x and y. New functionalities are added to allow the user choose and enter where he wants the robot to drive to. As the robot drives towards the user’s goal, the current position x and y as well as the the linear velocities are published on a custom message. A seperate service node prints the number of goals reached and cancelled. Another functionality is the implementation of a new node that subscribes to the robot’s position and velocity and then prints the distance of the robot from the target and the robot’s average speed. Further details are provided later in this readme file.</p>
+<section id="installing-and-running">
+<h2>Installing and running<a class="headerlink" href="#installing-and-running" title="Permalink to this heading"></a></h2>
+<p>Follow these instructions to correctly install and run this project</p>
+<section id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading"></a></h3>
+<p>This project was only tested and run on ROS NOETIC. For other versions of ROS, it is unsure if it will work perfectly. It will most likely present errors. Please feel to try and let me know. To install ros NOETIC on Ubuntu, follow the instructions <a class="reference external" href="http://wiki.ros.org/noetic/Installation/Ubuntu">here</a>.
+To successfully run this project, you also need to have Gazebo and Rviz installed in your computer. Click on these links to install <a class="reference external" href="https://classic.gazebosim.org/tutorials?tut=ros_installing&amp;amp;cat=connect_ros">Gazebo</a> and <a class="reference external" href="http://wiki.ros.org/rviz">Rviz</a>. To download the code, you can either directly download from github or you can use the following command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>https://github.com/Fritta013/Research-Track-1-Assignment-2.git
+</pre></div>
+</div>
+</section>
+<section id="running-from-shell">
+<h3>Running from shell<a class="headerlink" href="#running-from-shell" title="Permalink to this heading"></a></h3>
+<hr class="docutils" />
+<p>Once you have your catkin workspace all set up, you can go ahead and download this directory inside your src folder. You can also download this directory using the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> command. Once this is done, it is essential to run <code class="docutils literal notranslate"><span class="pre">catkin_make</span></code> at the root of your catkin workspace. Another important step before launching this project, is to source <code class="docutils literal notranslate"><span class="pre">/catkin_ws/devel/setup.bash</span></code> by running the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/catkin_ws/devel/setup.bash
+</pre></div>
+</div>
+<p>Assuming the previous steps were completed successfuly, you can now navigate to <code class="docutils literal notranslate"><span class="pre">assignment_2_2022</span></code> and run the project using the following command line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>assignment_2_2022<span class="w"> </span>assignment1.launch
+</pre></div>
+</div>
+</section>
+<section id="understanding-the-functionalities-and-structure-of-the-project">
+<h3>Understanding the Functionalities and structure of the project<a class="headerlink" href="#understanding-the-functionalities-and-structure-of-the-project" title="Permalink to this heading"></a></h3>
+<hr class="docutils" />
+<p>The structure of the <code class="docutils literal notranslate"><span class="pre">assignment_2_2022</span></code> package is organized as such:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>├──<span class="w"> </span>assignment_2_2022
+│<span class="w">   </span>├──<span class="w"> </span>config<span class="p">;</span><span class="w"> </span>which<span class="w"> </span>serves<span class="w"> </span>as<span class="w"> </span>configuration<span class="w"> </span>files<span class="w"> </span><span class="k">for</span><span class="w"> </span>simulation
+│<span class="w">       </span>├──<span class="w"> </span>sim.rviz
+│<span class="w">       </span>├──<span class="w"> </span>sim2.rvis
+│<span class="w">   </span>├──<span class="w"> </span>launch:<span class="w"> </span>which<span class="w"> </span>serves<span class="w"> </span>as<span class="w"> </span>roslaunch<span class="w"> </span>files
+│<span class="w">       </span>├──<span class="w"> </span>assignment1.launch
+│<span class="w">       </span>├──<span class="w"> </span>sim_w1.launch
+│<span class="w">   </span>├──<span class="w"> </span>urdf:<span class="w"> </span>which<span class="w"> </span>serves<span class="w"> </span>as<span class="w"> </span>robot<span class="w"> </span>description<span class="w"> </span>files
+│<span class="w">       </span>├──<span class="w"> </span>robot2_laser.gazebo
+│<span class="w">       </span>├──<span class="w"> </span>robot2_laser.xacro
+│<span class="w">   </span>├──<span class="w"> </span>urdf:<span class="w"> </span>which<span class="w"> </span>serves<span class="w"> </span>as<span class="w"> </span>robot<span class="w"> </span>description<span class="w"> </span>files
+│<span class="w">       </span>├──<span class="w"> </span>robot2_laser.gazebo
+│<span class="w">       </span>├──<span class="w"> </span>robot2_laser.xacro
+│<span class="w">   </span>├──<span class="w"> </span>urdf:<span class="w"> </span>which<span class="w"> </span>serves<span class="w"> </span>as<span class="w"> </span>robot<span class="w"> </span>description<span class="w"> </span>files
+│<span class="w">       </span>├──<span class="w"> </span>robot2_laser.gazebo
+│<span class="w">       </span>├──<span class="w"> </span>robot2_laser.xacro
+│<span class="w">   </span>├──<span class="w"> </span>worlds:<span class="w"> </span>which<span class="w"> </span>servers<span class="w"> </span>as<span class="w"> </span>environment<span class="w"> </span><span class="k">for</span><span class="w"> </span>simulation
+│<span class="w">       </span>├──<span class="w"> </span>assignment.world
+│<span class="w">   </span>├──<span class="w"> </span>action:<span class="w"> </span>which<span class="w"> </span>serves<span class="w"> </span>as<span class="w"> </span>action<span class="w"> </span>file
+│<span class="w">       </span>├──<span class="w"> </span>Positions.action
+│<span class="w">   </span>├──<span class="w"> </span>msg:<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>custom<span class="w"> </span>messages<span class="w"> </span>
+│<span class="w">       </span>├──<span class="w"> </span>RobotPose.msg
+│<span class="w">   </span>├──<span class="w"> </span>srv:<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>ros<span class="w"> </span>services<span class="w">  </span>
+│<span class="w">       </span>├──<span class="w"> </span>check_status.srv
+│<span class="w">   </span>├──<span class="w"> </span>scripts:<span class="w"> </span>ros<span class="w"> </span>node<span class="w"> </span>to<span class="w"> </span>fulfill<span class="w"> </span>the<span class="w"> </span>functionalities<span class="w"> </span>and<span class="w"> </span>requirements<span class="w"> </span>of<span class="w"> </span>this<span class="w"> </span>project<span class="w"> </span>
+│<span class="w">       </span>├──<span class="w"> </span>UI.py<span class="w"> </span>
+│<span class="w">       </span>├──<span class="w"> </span>check_status.py
+│<span class="w">       </span>├──<span class="w"> </span>check_pos_vel.py
+│<span class="w">       </span>├──<span class="w"> </span>bug_as.py<span class="w"> </span>
+│<span class="w">       </span>├──<span class="w"> </span>go_to_point_service.py<span class="w"> </span>
+│<span class="w">       </span>├──<span class="w"> </span>wall_follow_service.py<span class="w"> </span>
+│<span class="w">   </span>├──<span class="w"> </span>CmakeLists.txt:<span class="w"> </span><span class="k">for</span><span class="w"> </span>building<span class="w"> </span>software<span class="w"> </span>packages
+│<span class="w">   </span>├──<span class="w"> </span>package.xml:<span class="w"> </span>to<span class="w"> </span>define<span class="w"> </span>properties<span class="w"> </span>about<span class="w"> </span>the<span class="w"> </span>package
+└──<span class="w"> </span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="project-breakdown">
+<h2>Project Breakdown<a class="headerlink" href="#project-breakdown" title="Permalink to this heading"></a></h2>
+<section id="launch-file">
+<h3>Launch file<a class="headerlink" href="#launch-file" title="Permalink to this heading"></a></h3>
+<p>This launch file starts several ROS nodes in the package <code class="docutils literal notranslate"><span class="pre">/assignment_2_2022</span></code> and launch a simulation environment. The launch file starts the following nodes:</p>
+<ul class="simple">
+<li><p>wall_follower: wall_follow_service.py ROS node</p></li>
+<li><p>go_to_point: go_to_point_service.py ROS node</p></li>
+<li><p>bug_action_service: bug_as.py ROS node</p></li>
+<li><p>user_interface: UI.py ROS node</p></li>
+<li><p>check_status: check_status.py ROS node</p></li>
+<li><p>check_position_velocity: check_pos_vel.py ROS node</p></li>
+</ul>
+<p>Additionally, the node check_position_velocity takes an additional parameter named rate_input with the value of 10.
+It is to be notedd that the different nodes communicate with each other to perform their tasks.</p>
+</section>
+<section id="the-ui-node">
+<h3>The UI node<a class="headerlink" href="#the-ui-node" title="Permalink to this heading"></a></h3>
+<p>This ROS node is an action client that allows a user to send a target position goal to an action server using the PositionsAction message (PositionsGoal). The node subscribes to the /odom topic to get the current linear velocity of the robot, and then publishes the linear velocity, vx and vy of the robot on the robot_pose topic. The node gets the current position x and y of the robot from the feedback_callback method in UpdatePositionsClient class. Then, it publishes the current position, x and y, and linear velocity, vx and vy of the robot on the custom message and under the topic ‘robot_pose’. The final result is also obtained from the get_result_callback method in the same class. It declares whether the gaol is finished successfully or if it failed.
+Below is the flowchart for the node: <code class="docutils literal notranslate"><span class="pre">UI.py</span></code>
+<img alt="UI flowchart!" src="_images/UI.png" /></p>
+</section>
+<section id="the-check-status-node">
+<h3>The check_status node<a class="headerlink" href="#the-check-status-node" title="Permalink to this heading"></a></h3>
+<p>This ROS node is a service node that subscribes to the topic /reaching_goal/status and when requested listens for updates on the status of goals. The node is able to access the status of the goal through <code class="docutils literal notranslate"><span class="pre">GoalStatus</span></code> where each every GoalStatusArray presents a specific state as demonstrated in the lines of code below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">goal_status</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">GoalStatus</span><span class="o">.</span><span class="n">ACTIVE</span><span class="p">:</span>
+            <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Goal is active&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">goal_status</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">GoalStatus</span><span class="o">.</span><span class="n">SUCCEEDED</span><span class="p">:</span> 
+            <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Goal succeeded&quot;</span><span class="p">)</span>
+            <span class="n">counter_success</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;number of goals success is </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">counter_success</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">goal_status</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">GoalStatus</span><span class="o">.</span><span class="n">ABORTED</span><span class="p">:</span> 
+            <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Goal aborted&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">goal_status</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">GoalStatus</span><span class="o">.</span><span class="n">PREEMPTED</span><span class="p">:</span> 
+            <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Goal preempted&quot;</span><span class="p">)</span>
+            <span class="n">counter_cancelled</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;number of goals cancelled is </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">counter_cancelled</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">goal_status</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">GoalStatus</span><span class="o">.</span><span class="n">REJECTED</span><span class="p">:</span>  
+            <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Goal rejected&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">goal_status</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">GoalStatus</span><span class="o">.</span><span class="n">RECALLED</span><span class="p">:</span> 
+            <span class="n">rospy</span><span class="o">.</span><span class="n">loginfo</span><span class="p">(</span><span class="s2">&quot;Goal recalled&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The node also counts the number of goals that have been successfully reached and the number of goals that have been cancelled. It then provides a service named “check_status” which when requested, returns the number of successful and cancelled goals.</p>
+</section>
+<section id="the-check-pos-vel-node">
+<h3>The check_pos_vel node<a class="headerlink" href="#the-check-pos-vel-node" title="Permalink to this heading"></a></h3>
+<p>This node subscribes to the robot’s position and velocity, using the custom message from the UI.py node, and prints the
+distance of the robot from the target and the robot’s average speed. It subscribes to two topics: “robot_pose” and “reaching_goal”. The “robot_pose” topic is used to get the current position of the robot, x and y, and the “reaching_goal” topic is used to get the target position of the robot, previously set by the user. The node also calculates the distance between the current position and the target position and prints the distance to the console. It is possible to set at how fast the node publishes the information.</p>
+</section>
+<section id="future-improvement">
+<h3>Future Improvement<a class="headerlink" href="#future-improvement" title="Permalink to this heading"></a></h3>
+<hr class="docutils" />
+<p>This project can be improved in many possible ways, below are some points that could be fixed to make the code more efficient:</p>
+<ul class="simple">
+<li><p>In node <code class="docutils literal notranslate"><span class="pre">UI.py</span></code>, the case where the goal fails is not handled well. Some lines of code should be added so that when the PositionsGoal (or PositionsRequest) fails, more information should be provided to report back to the user why the Goal failed.</p></li>
+<li><p>Allow the user to increase to decrease the linear speed of the robot</p></li>
+<li><p>Allow the user to change his target positions x and y throughout the course after having selected his initial target positions instead of having to cancelling them.</p></li>
+<li><p>Report back or retrieve more information from the robot’s sensors to better track the robot’s progress and motion planning. These information could be published in log files or custom messages.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Ines Haouala.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

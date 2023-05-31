@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to RT2_CW2_sphinx’s documentation! &mdash; RT2_CW2_sphinx 0.0.1 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            RT2_CW2_sphinx
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Welcome to RT2_CW2_sphinx’s documentation!</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#my-project">My Project</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#project-breakdown">Project Breakdown</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">RT2_CW2_sphinx</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Welcome to RT2_CW2_sphinx’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-rt2-cw2-sphinx-s-documentation">
+<h1>Welcome to RT2_CW2_sphinx’s documentation!<a class="headerlink" href="#welcome-to-rt2-cw2-sphinx-s-documentation" title="Permalink to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+<section id="my-project">
+<h1>My Project<a class="headerlink" href="#my-project" title="Permalink to this heading"></a></h1>
+<p>Welcome to the documentation of My Project! The documentation was completed using sphinx</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p><em>Robot Simulation using Python and ROS</em></p>
+<p>This project is a simulation of a motion planning of a mobile robot in an environment.</p>
+<p>Initially, the robot was controlled using the information in its environment. The necessary nodes were implemented to allow the robot to follow/drive towards a set position (target x and y), avoid and follow obstacles (bug0 algorithm) to finally reach the target positions x and y. New functionalities are added to allow the user to choose and enter where they want the robot to drive to. As the robot drives towards the user’s goal, the current position x and y, as well as the linear velocities, are published on a custom message. A separate service node prints the number of goals reached and canceled. Another functionality is the implementation of a new node that subscribes to the robot’s position and velocity and then prints the distance of the robot from the target and the robot’s average speed. Further details are provided later in this readme file.</p>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p><strong>Installing and Running</strong></p>
+<p>Follow these instructions to correctly install and run this project.</p>
+<p>This project was only tested and run on ROS NOETIC. For other versions of ROS, it is unsure if it will work perfectly. It will most likely present errors. Please feel free to try and let me know. To install ROS NOETIC on Ubuntu, follow the instructions <a class="reference external" href="https://ros.org">here</a>. To successfully run this project, you also need to have Gazebo and Rviz installed on your computer. Click on these links to install <a class="reference external" href="https://gazebosim.org">Gazebo</a> and <a class="reference external" href="https://ros.org">Rviz</a>. To download the code, you can either directly download it from <a class="reference external" href="https://github.com/Fritta013/Research-Track-1-Assignment-2.git">GitHub</a> or you can use the following command line:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Fritta013/Research-Track-1-Assignment-2.git
+</pre></div>
+</div>
+<p>Assuming the previous steps were completed successfully, you can now navigate to <code class="docutils literal notranslate"><span class="pre">assignment_2_2022</span></code> and run the project using the following command line:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>roslaunch<span class="w"> </span>assignment_2_2022<span class="w"> </span>assignment1.launch
+</pre></div>
+</div>
+</section>
+<section id="project-breakdown">
+<h2>Project Breakdown<a class="headerlink" href="#project-breakdown" title="Permalink to this heading"></a></h2>
+<p>The structure of the <code class="docutils literal notranslate"><span class="pre">assignment_2_2022</span></code> package is organized as follows:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">config</span></code>: serves as configuration files for simulation
+- <cite>sim.rviz</cite>
+- <cite>sim2.rviz</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">launch</span></code>: serves as roslaunch files
+- <cite>assignment1.launch</cite>
+- <cite>sim_w1.launch</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">urdf</span></code>: serves as robot description files
+- <cite>robot2_laser.gazebo</cite>
+- <cite>robot2_laser.xacro</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">worlds</span></code>: serves as an environment for simulation
+- <cite>assignment.world</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">action</span></code>: serves as an action file
+- <cite>Positions.action</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">msg</span></code>: for the custom messages
+- <cite>RobotPose.msg</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">srv</span></code>: for the ROS services
+- <cite>check_status.srv</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scripts</span></code>: ROS nodes to fulfill the functionalities and requirements of this project
+- <cite>UI.py</cite>
+- <cite>check_status.py</cite>
+- <cite>check_pos_vel.py</cite>
+- <cite>bug_as.py</cite>
+- <cite>go_to_point_service.py</cite>
+- <cite>wall_follow_service.py</cite></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>: for building software packages</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">package.xml</span></code>: to define properties about the package</p></li>
+</ul>
+<p><strong>Launch File</strong></p>
+<p>This launch file starts several ROS nodes in the package <cite>/assignment_2_2022</cite> and launches a simulation environment. The launch file starts the following nodes:</p>
+<ul class="simple">
+<li><p><cite>wall_follower</cite>: <code class="docutils literal notranslate"><span class="pre">wall_follow_service.py</span></code> ROS node</p></li>
+<li><p><cite>go_to_point</cite>: <code class="docutils literal notranslate"><span class="pre">go_to_point_service.py</span></code> ROS node</p></li>
+<li><p><cite>bug_action_service</cite>: <code class="docutils literal notranslate"><span class="pre">bug_as.py</span></code> ROS node</p></li>
+<li><p><cite>user_interface</cite>: <code class="docutils literal notranslate"><span class="pre">UI.py</span></code> ROS node</p></li>
+<li><p><cite>check_status</cite>: <code class="docutils literal notranslate"><span class="pre">check_status.py</span></code> ROS node</p></li>
+<li><p><cite>check_position_velocity</cite>: <code class="docutils literal notranslate"><span class="pre">check_pos_vel.py</span></code> ROS node</p></li>
+</ul>
+<p>Additionally, the node <code class="docutils literal notranslate"><span class="pre">check_position_velocity</span></code> takes an additional parameter named <cite>rate_input</cite> with the value of 10. It is to be noted that the different nodes communicate with each other to perform their tasks.</p>
+<p><em>The UI node</em></p>
+<p>This ROS node is an action client that allows a user to send a target position goal to an action server using the <cite>PositionsAction</cite> message (<cite>PositionsGoal</cite>). The node subscribes to the <cite>/odom</cite> topic to get the current linear velocity of the robot and publishes the linear velocity (<cite>vx</cite> and <cite>vy</cite>) of the robot on the <cite>robot_pose</cite> topic. The node obtains the current position (<cite>x</cite> and <cite>y</cite>) of the robot from the <cite>feedback_callback</cite> method in the <cite>UpdatePositionsClient</cite> class. It then publishes the current position and linear velocity of the robot on the <cite>robot_pose</cite> topic using a custom message. The final result is obtained from the <cite>get_result_callback</cite> method in the same class, which declares whether the goal finished successfully or failed. Below is the flowchart for the node:</p>
+<img alt="Description of the image" class="align-center" src="_images/UI.png" />
+<p><em>The check_status node</em></p>
+<p>This ROS node is a service node that subscribes to the topic <code class="docutils literal notranslate"><span class="pre">/reaching_goal/status</span></code> and listens for updates on the status of goals. The node can access the status of the goal through <cite>GoalStatus</cite>, where each <cite>GoalStatusArray</cite> presents a specific state. The node counts the number of goals that have been successfully reached and the number of goals that have been cancelled. It provides a service named “check_status” that, when requested, returns the number of successful and cancelled goals.</p>
+<p><em>The check_pos_vel node</em></p>
+<p>This node subscribes to the robot’s position and velocity using the custom message from the <code class="docutils literal notranslate"><span class="pre">UI.py</span></code> node. It prints the distance of the robot from the target and the robot’s average speed. It subscribes to two topics: <cite>robot_pose</cite> and <cite>reaching_goal</cite>. The <cite>robot_pose</cite> topic provides the current position (<cite>x</cite> and <cite>y</cite>) of the robot, while the <cite>reaching_goal</cite> topic provides the target position previously set by the user. The node calculates the distance between the current position and the target position and prints it to the console.</p>
+<p><em>Future Improvement</em></p>
+<p>This project can be improved in many possible ways. Some suggestions for future improvements include:</p>
+<ul class="simple">
+<li><p>Handling the case where the goal fails in the <code class="docutils literal notranslate"><span class="pre">UI.py</span></code> node by providing more information to report back to the user.</p></li>
+<li><p>Allowing the user to increase or decrease the linear speed of the robot.</p></li>
+<li><p>Allowing the user to change the target positions (<code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>) throughout the course instead of having to cancel them.</p></li>
+<li><p>Retrieving more information from the robot’s sensors to better track the robot’s progress and motion planning.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Ines Haouala.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
