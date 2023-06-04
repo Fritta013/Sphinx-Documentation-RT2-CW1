@@ -8,6 +8,26 @@ Welcome to RT2_CW2_sphinx's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   scripts/UI
+   scripts/check_pos_vel
+   scripts/check_status
+
+UI Module
+---------
+.. automodule:: scripts.UI
+   :members:
+
+check_pos_vel Module
+--------------------
+.. automodule:: scripts.check_pos_vel
+   :members:
+
+check_status Module
+-------------------
+.. automodule:: scripts.check_status
+   :members:
+
+   
 
 Indices and tables
 ==================
@@ -15,6 +35,7 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
 
 My Project
 ==========
