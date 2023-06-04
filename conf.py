@@ -6,9 +6,6 @@
 import os
 import sys
 
-sys.path.insert(0, os.path.abspath('.'))
-
-
 project = 'RT2_CW2_sphinx'
 copyright = '2023, Ines Haouala'
 author = 'Ines Haouala'
