@@ -45,6 +45,4 @@ autodoc_default_options = {
 }
 
 # Add the path to my Python scripts directory
-import os
-import sys
 sys.path.insert(0, os.path.abspath('./scripts'))
