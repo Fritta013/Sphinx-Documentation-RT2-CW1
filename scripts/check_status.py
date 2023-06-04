@@ -37,6 +37,13 @@ node_check_status = "/check_status"
 
 
 def status_callback(msg):
+
+    """
+    Callback function.
+    When the action server receives the goal's status, it calls this function
+    For cancelled and accomplished goals, it changes the counters and logs the status
+    
+    """
     global counter_cancelled 
     global counter_success
     for goal_status in msg.status_list:
@@ -60,6 +67,12 @@ def status_callback(msg):
     
 #define the service callback function that will be called when the service is requested
 def check_status_srv(req):
+
+    """
+    Service callback function for the 'check_status' service.
+    When the service is requested, this function is called.
+    It gives back the counter values for goals that were abandoned and accomplished
+    """
     global counter_cancelled 
     global counter_success
     res = check_statusResponse()
