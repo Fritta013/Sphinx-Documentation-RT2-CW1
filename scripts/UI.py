@@ -13,6 +13,11 @@ linear_x = 0
 linear_y = 0
  
 def odom_callback(data):
+    """
+    odom topic Callback function. Every time fresh odometry data is received, this function is called.
+    The global variables' linear velocities are updated
+    """
+
     global linear_x, linear_y
     linear_x = data.twist.linear.x
     linear_y = data.twist.linear.y
@@ -22,11 +27,25 @@ def odom_callback(data):
 class UpdatePositionsClient():
     def __init__(self):
        # Initializes _client node
+       """
+       creates the UpdatePositionsClient.
+       This class is in charge of managing the action client and disseminating messages about robot poses
+
+       """
+
        self._action_client = actionlib.SimpleActionClient('reaching_goal', assignment_2_2022.msg.PositionsAction)
        self._publisher = rospy.Publisher('robot_pose', RobotPose, queue_size=10)
 
     # Waits for server to be available, then sends goal
     def send_goal(self, x , y):
+        """
+        gives the action server an objective to receive: 
+        Args:
+        
+         x (float): The target x 
+         y (float): The target y
+
+        """
         goal_msg = assignment_2_2022.msg.PositionsGoal()
         goal_msg.target_x = x
         goal_msg.target_y = y
@@ -71,12 +90,21 @@ class UpdatePositionsClient():
 
     #method to allow the user to cancel target positions x and y that was sent to the server
     def cancel_goal(self):
+        """
+        sends the goal to the action server is canceled.
+
+        The goal that was delivered to the action server is canceled using this method 
+        """
         self._action_client.cancel_goal()
 
 
     
         
 def main(args=None):
+
+    """
+    MAin function.  The user interface for sending objectives is launched by this method, which also initializes the ROS node
+    """
 # Init ROS1 and give the node a name
 
     
