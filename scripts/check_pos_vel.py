@@ -26,6 +26,13 @@ global goal_y
 
 
 def message_callback(data):
+    """
+    robot_pose topic Callback function.
+    The 'RobotPose' message is called when this function is called
+    It takes the message's current position (x, y) and prints it
+    
+    """
+
     global x
     global y
     x = data.current_x
@@ -36,6 +43,13 @@ def message_callback(data):
 
 
 def action_callback(data):
+
+    """
+    reaching_goal' action Callback function
+
+    When the 'PositionsRequest' action objective is received, this method is called.
+    The target position (goal_x, goal_y) is taken out of the message and printed
+    """
     global goal_x
     global goal_y
     goal_x = data.target_x
@@ -48,7 +62,12 @@ def action_callback(data):
 
 def main(args=None):
 
-    
+    """
+    Main function 
+
+    The 'robot_pose' and'reaching_goal' topics are subscribed to by this function, which also initializes the ROS node.
+    It calculates and logs the distance between the current location and the desired location
+    """
 
        
        #subscribe to custom message RobotPose to get current positions x and y publised by "UI" node
